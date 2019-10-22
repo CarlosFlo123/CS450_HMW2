@@ -1,7 +1,7 @@
 '''--------------------------------------------------------------------------
 Author: Carlos Flores Valero
 Northwestern Polytechnic University, Fremont, CA
-Date: 10/06/2019
+Last Update Date: 10/22/2019
 ---------------------------------------------------------------------------'''
 #Ex1__________________________________________________
 def fancy_printing(n):
@@ -25,7 +25,6 @@ def sum_num(n):
 #sum_num(4)
 #sum_num(5)
 
-
 #Ex3 __________________________________________________
 def is_prime(n):
   i = n -1
@@ -46,24 +45,31 @@ def cnt_primes(m):
 
 
 #Ex4___________________________________________________
-#not finished, gotta reinforce high ordr function concept
+#All set with this guy, nested functions concept clear after this.
+def identity(n):
+  if n < 0:
+    return n * (-1)
+  return n
 def incr(n):
   return (n + 1)
 def triple(x):
   return (3*x)
 def square(x):
   return (x*x)
+
 def foo(f, n):
   def h(x):
-    return f(x)
-  if (n == -1):
-    return 0
-  else:
-    return h + foo(f,n-1)
+    if n == 1:
+      return f(x)
+    else:
+      return foo(f, n-1)(f(x))
+  return h
 
+#add3 = foo(incr, 3)
+#add3(5)
 #foo(triple, 5)(1)
-
-
+#foo(square, 2)(5)
+#foo(square, 4)(5)
 
 #Ex5___________________________________________________
 def op(a, b, c):
@@ -85,7 +91,7 @@ def checking(x):
       return True
   while (x > 1):
     tmp = x % 10
-    x = x / 10
+    x = int(x / 10) #Quick fix at concatenate
     if(tmp < x%10):
       return False
   return True
@@ -112,27 +118,35 @@ def cal(n):
 
 
 #Ex8___________________________________________________
-''' itscts(f, x):
-  def h(x):
-    return lambda (f(x) == h(x)): True, False
+def itscts(f, x):
+  def h(anotherFunction):
+    if f(x) == anotherFunction(x):
+      return True
+    return False
   return h
 
+#at3 = itscts(square,3)
+#at3(triple)
+#at3(incr)
+#at1 = itscts(identity, 1)
+#at1(square)
+#at1(triple)
 
-at3 = itscts(square,3)
-at3(triple)
+
 
 #Ex9___________________________________________________
 def A(n):
   if (n <= 3):
     return n
   else:
-    return 1+1 * A(n-1)
+    return A(n-1) + 2 * A(n-2) + 3*A(n-3)
 
-A(1)
-A(2)
-A(3)
-A(4)
-'''
+#A(1)
+#A(2)
+#A(3)
+#A(4)
+#A(5)
+
 
 #Ex10___________________________________________________
 def scanDigits(x):
